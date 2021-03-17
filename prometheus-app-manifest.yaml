@@ -1,0 +1,16 @@
+project: default
+source:
+  repoURL: 'https://github.com/logankimmel/digi-trans.git'
+  path: prometheus
+  targetRevision: HEAD
+  helm:
+    parameters:
+      - name: alertmanager.enabled
+        value: 'false'
+destination:
+  namespace: prometheus
+  name: lk-test.k8s.local
+syncPolicy:
+  syncOptions:
+    - CreateNamespace=true
+
