@@ -11,10 +11,9 @@ kops create cluster lk-test.k8s.local \
 --vpc test-net
 kops validate cluster --wait 10m
 
-#kubectl create namespace argocd
-#kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
-#kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
-#kubectl port-forward svc/argocd-server -n argocd 8080:443
+argocd app create prometheus --repo https://prometheus-community.github.io \
+  --helm-chart prometheus-community/prometheus --revision 13.6.0 --dest-namespace prometheus \
+  --dest-server https://34.70.219.120 --dest-namespace prometheus
 
 
 #helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
