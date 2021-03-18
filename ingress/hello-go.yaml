@@ -1,0 +1,16 @@
+iapiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: hello-go
+spec:
+  entryPoints:
+  - websecure
+  routes:
+  - kind: Rule
+    match: Host(`hello-go.test.binbytes.io`)
+    services:
+    - name: hello-go
+      namespace: hello-go
+      port: 80
+  tls:
+    certResolver: binbytes
