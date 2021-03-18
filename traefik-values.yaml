@@ -1,0 +1,13 @@
+additionalArguments:
+  - "--certificatesResolvers.binbytes.acme.dnsChallenge=true"
+  - "--certificatesResolvers.binbytes.acme.dnsChallenge.provider=gcloud"
+  - "--certificatesresolvers.binbytes.acme.email=logan@lkimmel.com"
+  - "--certificatesresolvers.binbytes.acme.storage=acme.json"
+env:
+  - name: GCE_PROJECT
+    value: lkimmel-1069
+  - name: GCE_SERVICE_ACCOUNT
+    valueFrom:
+      secretKeyRef:
+        name: binbytes-dns
+        key: data
