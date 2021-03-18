@@ -2,7 +2,7 @@ additionalArguments:
   - "--certificatesResolvers.binbytes.acme.dnsChallenge=true"
   - "--certificatesResolvers.binbytes.acme.dnsChallenge.provider=gcloud"
   - "--certificatesresolvers.binbytes.acme.email=logan@lkimmel.com"
-  - "--certificatesresolvers.binbytes.acme.storage=acme.json"
+  - "--certificatesresolvers.binbytes.acme.storage=/data/acme.json"
 env:
   - name: GCE_PROJECT
     value: lkimmel-1069
