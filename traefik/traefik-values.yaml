@@ -11,3 +11,5 @@ env:
       secretKeyRef:
         name: binbytes-dns
         key: data
+persistence:
+  enabled: true
