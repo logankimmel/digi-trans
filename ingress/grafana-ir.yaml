@@ -1,0 +1,16 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: grafana
+spec:
+  entryPoints:
+  - websecure
+  routes:
+  - kind: Rule
+    match: Host(`grafana.test.binbytes.io`)
+    services:
+    - name: prom-stack-grafana
+      namespace: prometheus
+      port: 80
+  tls:
+    certResolver: binbytes

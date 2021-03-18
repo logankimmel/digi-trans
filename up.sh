@@ -35,7 +35,9 @@ while [ -z $external_ip ]; do                                                   
   [ -z "$external_ip" ] && sleep 10
 done
 
-
 gcloud dns record-sets transaction start --zone binbytes
 gcloud dns record-sets transaction add 34.123.6.234 --name='*.test.binbytes.io' --ttl=300 --type=A --zone=binbyte
 gcloud dns record-sets transaction execute --zone binbytes
+
+kubectl  --context gke_customers-2_us-central1_logan-support-1  apply -f ingress-manifest.yaml
+argocd app sync ingress
