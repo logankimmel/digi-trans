@@ -27,3 +27,15 @@ argocd app sync kibana
 
 kubectl --context lk-test.k8s.local create ns traefik
 kubectl --context gke_customers-2_us-central1_logan-support-1 get secret binbytes-dns -n traefik -o yaml  | kubectl --context lk-test.k8s.local apply -n traefik -f -
+
+external_ip=""
+while [ -z $external_ip ]; do                                                                                                                                                                [±main ●●]
+  echo "Waiting for end point..."
+  external_ip=$(kubectl get svc traefik -n traefik --template="{{range .status.loadBalancer.ingress}}{{.ip}}{{end}}")
+  [ -z "$external_ip" ] && sleep 10
+done
+
+
+gcloud dns record-sets transaction start --zone binbytes
+gcloud dns record-sets transaction add 34.123.6.234 --name='*.test.binbytes.io' --ttl=300 --type=A --zone=binbyte
+gcloud dns record-sets transaction execute --zone binbytes

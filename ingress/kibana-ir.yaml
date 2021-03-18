@@ -1,0 +1,16 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: kibana
+spec:
+  entryPoints:
+  - websecure
+  routes:
+  - kind: Rule
+    match: Host(`kibana.test.binbytes.io`)
+    services:
+    - name: kibana-kibana
+      namespace: elastic
+      port: 5601
+  tls:
+    certResolver: binbytes
